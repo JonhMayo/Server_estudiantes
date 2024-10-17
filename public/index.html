@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Estudiantes</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <div class="container">
+        <h1>API de Estudiantes</h1>
+
+        <section class="endpoint">
+            <h2>Obtener datos de los estudiantes</h2>
+            <button onclick="getAllEstudiantes()">Obtener Estudiantes</button>
+            <pre id="getAllResponse"></pre>
+        </section>
+
+        <section class="endpoint">
+            <h2>Obtener estudiante por ID</h2>
+            <input type="number" id="idInput" placeholder="ID del estudiante" />
+            <button onclick="getEstudianteById()">Buscar por ID</button>
+            <pre id="getByIdResponse"></pre>
+        </section>
+
+        <section class="endpoint">
+            <h2>Agregar nuevo estudiante</h2>
+            <input type="number" id="newId" placeholder="ID" />
+            <input type="text" id="newMatricula" placeholder="Matrícula" />
+            <input type="text" id="newNombre" placeholder="Nombre" />
+            <button onclick="addEstudiante()">Agregar Estudiante</button>
+            <pre id="addResponse"></pre>
+        </section>
+
+          <section class="endpoint">
+            <h2>Lista de estudiantes</h2>
+            <button onclick="getAllEstudiantes1()">Cargar Lista de Estudiantes</button>
+            <form id="studentsForm">
+                <ul id="studentsList"></ul>
+            </form>
+            <button onclick="deleteSelectedEstudiantes()">Eliminar Estudiantes Seleccionados</button>
+            <pre id="deleteResponse"></pre>
+        </section>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
