@@ -1,8 +1,3 @@
-const profesores = [
-    { id: 1, nombre: 'Martin Olguin', cursos: [1] },
-    { id: 2, nombre: 'Omar Munoz', cursos: [2] },
-];
-
 function findAll() {
     return profesores;
 }

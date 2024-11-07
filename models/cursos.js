@@ -1,7 +1,3 @@
-const cursos = [
-    { id: 1, nombre: 'Ingeniería de Software', profesorId: 1, estudiantes: [1, 3] },
-    { id: 2, nombre: 'Electrónica Avanzada', profesorId: 2, estudiantes: [1, 2] },
-];
 
 function findAll() {
     return cursos;

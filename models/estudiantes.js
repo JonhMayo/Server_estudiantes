@@ -1,9 +1,4 @@
-const estudiantes = [
-    { id: 1, matricula: '12345', nombre: 'Jonathan Granados', cursos: [1, 2] },
-    { id: 2, matricula: '54321', nombre: 'Cristian Mesa', cursos: [2] },
-    { id: 3, matricula: '22357', nombre: 'Maía Camarey', cursos: [1] },
-  ];
-  
+
   function findAll() {
     return estudiantes;
   }
