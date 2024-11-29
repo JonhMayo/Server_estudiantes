@@ -1,12 +1,11 @@
-const Curso = require('../models/cursosdb');
-const Alumno = require('../models/estudiantesdb');
-const Profesor = require('../models/profesoresdb');
+const Curso = require('./cursodb');
+const Alumno = require('./estudiantesdb');
+const Profesor = require('./profesoresdb');
 
-Curso.belongsToMany(Alumno, { through: 'CursoAlumnos' });
-Alumno.belongsToMany(Curso, { through: 'CursoAlumnos' });
-
-Curso.belongsToMany(Profesor, { through: 'CursoProfesores' });
-Profesor.belongsToMany(Curso, { through: 'CursoProfesores' });
+Curso.belongsToMany(Alumno, { through: 'cursoalumnos', foreignKey: 'CursoId', otherKey: 'AlumnoId' });
+Curso.belongsToMany(Profesor, { through: 'cursoprofesores', foreignKey: 'CursoId', otherKey: 'ProfesorId' });
+Alumno.belongsToMany(Curso, { through: 'cursoalumnos', foreignKey: 'AlumnoId', otherKey: 'CursoId' });
+Profesor.belongsToMany(Curso, { through: 'cursoprofesores', foreignKey: 'ProfesorId', otherKey: 'CursoId' });
 
 module.exports = {
     Curso,

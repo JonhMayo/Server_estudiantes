@@ -1,4 +1,4 @@
-const { Alumno } = require('../models/asociaciones');
+const { Alumno, Curso, Profesor } = require('../models/asociaciones');
 
 // Obtener todos los estudiantes
 const getEstudiantes = async (req, res) => {
@@ -21,6 +21,37 @@ const getEstudianteById = async (req, res) => {
         res.status(200).json(estudiante);
     } catch (error) {
         res.status(500).send('Error al obtener el estudiante');
+    }
+};
+
+const getKardexEstudiante = async (req, res) => {
+    const matricula = req.params.matricula;
+
+    try {
+        // Buscar al estudiante por matrícula
+        const estudiante = await Alumno.findOne({
+            where: { matricula },
+            include: [
+                {
+                    association: 'cursos', // Nombre de la asociación entre Alumno y Curso en tu modelo
+                    include: [
+                        {
+                            association: 'profesor', // Nombre de la asociación entre Curso y Profesor en tu modelo
+                        },
+                    ],
+                },
+            ],
+        });
+
+        if (!estudiante) {
+            return res.status(404).send('Estudiante no encontrado');
+        }
+
+        // Enviar la información del alumno, sus cursos y profesores
+        res.status(200).json(estudiante);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error al obtener el kardex del estudiante');
     }
 };
 
@@ -95,6 +126,36 @@ const patchEstudiante = async (req, res) => {
     }
 };
 
+const getEstudianteByNombreCompleto = async (req, res) => {
+    const nombre = req.params.nombre;
+
+    try {
+        const estudiante = await Alumno.findOne({
+            where: { nombre },
+            include: [
+                {
+                    model: Curso,
+                    as: 'cursos',
+                    include: [
+                        {
+                            model: Profesor,
+                            as: 'profesores'
+                        }
+                    ]
+                }
+            ]
+        });
+
+        if (!estudiante) {
+            return res.status(404).json({ message: 'Estudiante no encontrado' });
+        }
+
+        res.status(200).json(estudiante);
+    } catch (error) {
+        console.error("Error al obtener el estudiante:", error);
+        res.status(500).json({ message: 'Error al obtener el estudiante' });
+    }
+};
 // Eliminar un estudiante por ID
 const deleteEstudiante = async (req, res) => {
     const id = parseInt(req.params.id);
@@ -119,5 +180,7 @@ module.exports = {
     createEstudiante,
     updateEstudiante,
     patchEstudiante,
-    deleteEstudiante
+    deleteEstudiante,
+    getKardexEstudiante,
+    getEstudianteByNombreCompleto
 };

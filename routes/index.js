@@ -10,7 +10,7 @@ fs.readdirSync(routesDirectory).forEach(file => {
         const routeName = file.replace('.js', '');
         const routePath = path.join(routesDirectory, file);
         routes[routeName] = require(routePath);
-        router.use(routes[routeName]);
+        router.use(`/${routeName}`,routes[routeName]);
     }
 });
 
